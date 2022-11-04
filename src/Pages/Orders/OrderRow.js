@@ -27,13 +27,13 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
                   </div>
                </div>
                <div>
-                  <div className="font-bold">{serviceName}</div>
+                  <div className="font-bold">{customer }</div>
                   <div className="text-sm opacity-50">Phone: {phone}</div>
                </div>
             </div>
          </td>
          <td>
-            {customer}
+            {serviceName}
             <br />
             <span className="badge badge-ghost badge-sm">Pirce: {price} $</span>
          </td>
