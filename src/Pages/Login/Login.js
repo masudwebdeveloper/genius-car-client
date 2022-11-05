@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import image from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import SocialLogin from '../../Shared/SocialLogin/SocialLogin';
 
 const Login = () => {
    const { login } = useContext(AuthContext);
@@ -19,29 +20,27 @@ const Login = () => {
             const user = result.user;
             form.reset();
 
-            const useEmail = {
+            const userEmail = {
                email: user.email,
             }
-            if (user) {
-               navigate(from, { replace: true });
-            }
 
-            fetch('http://localhost:5000/jwt', {
+            fetch('https://genius-car-server-sigma.vercel.app/jwt', {
                method: 'POST',
                headers: {
                   'content-type': 'application/json'
                },
-               body: JSON.stringify(useEmail)
+               body: JSON.stringify(userEmail)
             })
                .then(res => res.json())
                .then(data => {
-                  console.log(data.token);
                   localStorage.setItem('genius-token', data.token)
-            })
+                  navigate(from, { replace: true });
+
+               })
          })
          .catch(error => {
-         console.error(error.message);
-      })
+            console.error(error.message);
+         })
    }
    return (
       <div className="hero my-10">
@@ -56,15 +55,15 @@ const Login = () => {
                      <label className="label">
                         <span className="label-text">Email</span>
                      </label>
-                     <input type="email" name='email' placeholder="email" className="input input-bordered" required/>
+                     <input type="email" name='email' placeholder="email" className="input input-bordered" required />
                   </div>
                   <div className="form-control">
                      <label className="label">
                         <span className="label-text">Password</span>
                      </label>
-                     <input type="password" name='password' placeholder="password" className="input input-bordered" required/>
+                     <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                      <label className="label">
-                        <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                        <a href="/" className="label-text-alt link link-hover">Forgot password?</a>
                      </label>
                   </div>
                   <div className="form-control mt-6">
@@ -72,6 +71,7 @@ const Login = () => {
                   </div>
                </form>
                <p className='text-center'>New Genius Car?<Link className='text-orange-600 font-semibold' to="/signup">Sign Up</Link></p>
+               <SocialLogin></SocialLogin>
             </div>
          </div>
       </div>

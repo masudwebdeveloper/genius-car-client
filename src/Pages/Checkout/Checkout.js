@@ -24,10 +24,11 @@ const Checkout = () => {
          message
       }
 
-      fetch('http://localhost:5000/orders', {
+      fetch('https://genius-car-server-sigma.vercel.app/orders', {
          method: 'POST',
          headers: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('genius-token')}`
          },
          body: JSON.stringify(order)
       })
@@ -39,12 +40,12 @@ const Checkout = () => {
                form.reset();
             }
          })
-      .catch(err => console.error(err))
+         .catch(err => console.error(err))
 
    }
    return (
       <div className='p-20 bg-[#F3F3F3]'>
-         <h1 className="text-4xl font-bold mb-5">{ title}</h1>
+         <h1 className="text-4xl font-bold mb-5">{title}</h1>
          <form onSubmit={handlePlaceOrder}>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-5'>
                <input name='firstname' type="text" placeholder="firstName" className="input input-bordered input-warning w-full" />

@@ -7,7 +7,7 @@ const Main = () => {
    return (
       <div>
          <Header></Header>
-         <Outlet></Outlet>
+         <Outlet className="min-h-screen"></Outlet>
          <Footer></Footer>
       </div>
    );

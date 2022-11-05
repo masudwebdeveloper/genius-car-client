@@ -5,13 +5,13 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
    const [services, setServices] = useState({});
 
    useEffect(() => {
-      fetch(`http://localhost:5000/services/${service}`)
+      fetch(`https://genius-car-server-sigma.vercel.app/services/${service}`)
          .then(res => res.json())
          .then(data => setServices(data))
          .catch(err => console.error(err))
    }, [service])
 
-   
+
    return (
       <tr>
          <th>
@@ -27,7 +27,7 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
                   </div>
                </div>
                <div>
-                  <div className="font-bold">{customer }</div>
+                  <div className="font-bold">{customer}</div>
                   <div className="text-sm opacity-50">Phone: {phone}</div>
                </div>
             </div>
@@ -39,7 +39,7 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
          </td>
          <td>{email}</td>
          <th>
-            <button onClick={()=> handleStatusUpdate(_id)} className="btn btn-ghost btn-xs">{status ? status : 'pending'}</button>
+            <button onClick={() => handleStatusUpdate(_id)} className="btn btn-ghost btn-xs">{status ? status : 'pending'}</button>
          </th>
       </tr>
    );
